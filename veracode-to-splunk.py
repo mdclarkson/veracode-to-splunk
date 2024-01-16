@@ -167,12 +167,11 @@ class XMLAPI:
 						policy_updated_date_build = build_app['@policy_updated_date']
 
 						self.logger.debug('Checking if the build is already in the database.')
-						compare = self.database.compare(
+
+						if compare := self.database.compare(
 							tag=app_name,
 							uid=build_id,
-						)
-
-						if compare:
+						):
 							self.logger.debug('Build {0} is already in the database.'.format(build_id))
 						else:
 							self.logger.info('Getting the Build {0}.'.format(build_id))
@@ -221,12 +220,11 @@ class XMLAPI:
 					build_id = json.loads(apps_builds_list)['buildlist']['build']['@build_id']
 					policy_updated_date_build = json.loads(apps_builds_list)['buildlist']['build']['@policy_updated_date']
 
-					compare = self.database.compare(
+
+					if compare := self.database.compare(
 						tag=app_name,
 						uid=build_id,
-					)
-
-					if compare:
+					):
 						self.logger.debug('Build {0} is already in the database.'.format(build_id))
 					else:
 						self.logger.info('Getting the Build {0}.'.format(build_id))
@@ -427,9 +425,8 @@ class XMLAPI:
 		functionrelativelocation=None,):
 
 		self.logger.debug('Starting the process to save the file as CSV.')
-		get_real_names = self.repname(name=app_app_name.replace(' ','-'))
 
-		if get_real_names:
+		if get_real_names := self.repname(name=app_app_name.replace(' ','-')):
 			tecnologia = get_real_names[0]
 			sigla = get_real_names[1]
 			modulo = get_real_names[2]
