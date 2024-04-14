@@ -1,6 +1,6 @@
 certifi==2019.6.16
 chardet==3.0.4
-idna==2.8
+idna==3.7
 pprint==0.1
 PyYAML==5.2
 requests==2.22.0
