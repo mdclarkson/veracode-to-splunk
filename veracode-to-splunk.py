@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+import secrets
+
 __author__ = 'Andrey Glauzer'
 __license__ = "MIT"
 __version__ = "1.0.1"
@@ -24,7 +26,6 @@ import importlib
 import urllib.parse
 import pprint
 from datetime import date
-from random import choice
 from xml.parsers.expat import ExpatError
 
 
@@ -133,7 +134,7 @@ class XMLAPI:
 		auth = "Basic {}".format(self.stringToBase64(user=self.user,passwd=self.passwd).decode('UTF-8'))
 
 		header =  {
-			'User-Agent': choice(self.desktop_agents),
+			'User-Agent': secrets.choice(self.desktop_agents),
 			'Accept':'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
 			'Authorization': auth
 			}
