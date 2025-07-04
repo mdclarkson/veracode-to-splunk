@@ -2252,7 +2252,7 @@ class veracode:
 		self.logger.info('Getting information from the settings file.')
 
 		with open(args.config, 'r') as stream:
-			data = yaml.load(stream,  Loader=yaml.FullLoader)
+			data = yaml.load(stream,  Loader=yaml.SafeLoader)
 			database_path = data.get('database_path', '')
 			database_name = data.get('database_name', '')
 			save_log_dir = data.get('save_log_dir', '')
