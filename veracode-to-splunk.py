@@ -80,8 +80,8 @@ class DataBase:
 		cursor = conn.cursor()
 		cursor.execute("""
 		INSERT INTO VERACODE (tag,uid)
-		VALUES ('%s', '%s')
-		""" % (tag,uid))
+		VALUES (?, ?)
+		""", (tag, uid, ))
 		conn.commit()
 		conn.close()
 
@@ -164,7 +164,6 @@ class XMLAPI:
 					self.logger.debug(' Obtendo as builds.')
 					for build_app in json.loads(apps_builds_list)['buildlist']['build']:
 						build_id = build_app['@build_id']
-						policy_updated_date_build = build_app['@policy_updated_date']
 
 						self.logger.debug('Checking if the build is already in the database.')
 						compare = self.database.compare(
@@ -219,7 +218,6 @@ class XMLAPI:
 
 				except (TypeError) as e:
 					build_id = json.loads(apps_builds_list)['buildlist']['build']['@build_id']
-					policy_updated_date_build = json.loads(apps_builds_list)['buildlist']['build']['@policy_updated_date']
 
 					compare = self.database.compare(
 						tag=app_name,
